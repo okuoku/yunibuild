@@ -19,8 +19,8 @@ if(rr)
 endif()
 
 execute_process(COMMAND
-    WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
     docker build -f Dockerfile.ltsc2022 --tag ghcr.io/okuoku/yunibuild-cygwin-ltsc2022 .
+    WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
     RESULT_VARIABLE rr
     )
 
