@@ -1,0 +1,20 @@
+name: Cygwin Docker Images
+
+on:
+  push:
+    branches: ["trig-docker-cygwin"]
+
+env:
+  REGISTRY: ghcr.io
+
+jobs:
+  build:
+    runs-on: windows-2022
+    timeout-minutes: 120
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v4
+      - name: "Build"
+        run: |
+          cmake -P Docker-cygwin/build.cmake
+
