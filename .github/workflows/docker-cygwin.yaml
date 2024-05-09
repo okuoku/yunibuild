@@ -33,10 +33,6 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
 
-      - name: "Push ltsc2022"
+      - name: "Push image"
         run: |
           docker push ghcr.io/okuoku/yunibuild-cygwin-ltsc2022:latest
-
-      - name: "Push win10desktop"
-        run: |
-          docker push ghcr.io/okuoku/yunibuild-cygwin-win10desktop:latest
