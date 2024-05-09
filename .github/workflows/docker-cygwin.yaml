@@ -11,10 +11,32 @@ jobs:
   build:
     runs-on: windows-2022
     timeout-minutes: 120
+
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
+
       - name: "Build"
         run: |
           cmake -P Docker-cygwin/build.cmake
 
+      - name: "Login to registry"
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+
+      - name: "Push ltsc2022"
+        run: |
+          docker push ghcr.io/okuoku/yunibuild-cygwin-ltsc2022:latest
+
+      - name: "Push win10desktop"
+        run: |
+          docker push ghcr.io/okuoku/yunibuild-cygwin-win10desktop:latest
