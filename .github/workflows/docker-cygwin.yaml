@@ -23,7 +23,7 @@ jobs:
 
       - name: "Build"
         run: |
-          cmake -P Docker-cygwin/build.cmake
+          cmake -P Docker-windows/build.cmake
 
       - name: "Login to registry"
         uses: docker/login-action@v3
