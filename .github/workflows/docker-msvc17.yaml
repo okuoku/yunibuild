@@ -26,10 +26,12 @@ jobs:
           cmake -P Docker-windows/pre-gen-dockerfiles.cmake
 
       - name: "Build image (win10desktop)"
+        working-directory: Docker-windows
         run: |
           docker build --isolation hyperv -f Dockerfile-msvc17.win10desktop --tag ghcr.io/okuoku/yunibuild-msvc17-win10desktop .
 
       - name: "Build image (ltsc2022)"
+        working-directory: Docker-windows
         run: |
           docker build --isolation process -f Dockerfile-msvc17.ltsc2022 --tag ghcr.io/okuoku/yunibuild-msvc17-ltsc2022 .
 
