@@ -19,7 +19,8 @@ if(rr)
 endif()
 
 execute_process(COMMAND
-    docker build -f Dockerfile-cygwin.ltsc2022 --tag ghcr.io/okuoku/yunibuild-cygwin-ltsc2022 .
+    docker build --isolation hyperv -f Dockerfile-cygwin.win10desktop
+    --tag ghcr.io/okuoku/yunibuild-cygwin-win10desktop .
     WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
     RESULT_VARIABLE rr
     )
@@ -27,3 +28,14 @@ execute_process(COMMAND
 if(rr)
     message(FATAL_ERROR "Err3")
 endif()
+
+execute_process(COMMAND
+    docker build -f Dockerfile-cygwin.ltsc2022 --tag ghcr.io/okuoku/yunibuild-cygwin-ltsc2022 .
+    WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
+    RESULT_VARIABLE rr
+    )
+
+if(rr)
+    message(FATAL_ERROR "Err4")
+endif()
+
