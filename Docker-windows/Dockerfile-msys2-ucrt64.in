@@ -11,6 +11,6 @@ RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tl
   msys 'pacman --noconfirm -Syuu'; \
   msys 'pacman --noconfirm -Syuu'; \
   msys 'pacman --noconfirm -Scc'; \
-  msys 'pacman --noconfirm -S git python ninja mingw-w64-ucrt-x86_64-toolchain base-devel python-setuptools mingw-w64-ucrt-x86_64-libslirp mingw-w64-ucrt-x86_64-glib2 mingw-w64-ucrt-x86_64-pixman';
+  msys 'pacman --noconfirm -S git cmake python ninja mingw-w64-ucrt-x86_64-toolchain base-devel python-setuptools mingw-w64-ucrt-x86_64-libslirp mingw-w64-ucrt-x86_64-glib2 mingw-w64-ucrt-x86_64-pixman';
 
 LABEL org.opencontainers.image.source=https://github.com/okuoku/yunibuild
