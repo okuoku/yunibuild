@@ -1,0 +1,6 @@
+[submodule "tools/binlogdump"]
+	path = tools/binlogdump
+	url = https://github.com/okuoku/binlogdump
+[submodule "tools/execlogger"]
+	path = tools/execlogger
+	url = https://github.com/okuoku/rs-buildreplay-proto
