@@ -1,0 +1,51 @@
+name: MSYS2 UCRT64 Docker Images
+
+on:
+  push:
+    branches: ["trig-docker-msys2-ucrt64"]
+
+env:
+  REGISTRY: ghcr.io
+
+jobs:
+  build:
+    runs-on: windows-2022
+    timeout-minutes: 480
+
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v4
+
+      - name: "Create Dockerfiles"
+        run: |
+          cmake -P Docker-windows/pre-gen-dockerfiles.cmake
+
+      - name: "Build image (win10desktop)"
+        working-directory: Docker-windows
+        run: |
+          docker build --isolation hyperv -f Dockerfile-msys2-ucrt64.win10desktop --tag ghcr.io/okuoku/yunibuild-msys2-ucrt64-win10desktop .
+
+      - name: "Build image (ltsc2022)"
+        working-directory: Docker-windows
+        run: |
+          docker build --isolation process -f Dockerfile-msys2-ucrt64.ltsc2022 --tag ghcr.io/okuoku/yunibuild-msys2-ucrt64-ltsc2022 .
+
+      - name: "Login to registry"
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: "Push image (win10desktop)"
+        run: |
+          docker push ghcr.io/okuoku/yunibuild-msys2-ucrt64-win10desktop:latest
+
+      - name: "Push image (ltsc2022)"
+        run: |
+          docker push ghcr.io/okuoku/yunibuild-msys2-ucrt64-ltsc2022:latest
