@@ -20,6 +20,7 @@ file(MAKE_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/bin)
 if(NOT IN_CONTAINER)
     execute_process(COMMAND
         docker run --rm
+        --isolation process
         -v ${root0}:c:/source:ro
         -v ${out}:c:/out:rw
         yunibuild-msvc17
